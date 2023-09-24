@@ -1,4 +1,12 @@
-import { Given, When, Then, And } from 'cypress-cucumber-preprocessor/steps';
+import { Before, After, Given, When, Then, And } from 'cypress-cucumber-preprocessor/steps';
+
+Before(() => {
+  cy.reload();
+});
+
+After(() => {
+  cy.reload();
+});
 
 Cypress.on('uncaught:exception', (err, runnable) => {
   // returning false here prevents Cypress from

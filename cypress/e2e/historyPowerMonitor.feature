@@ -5,12 +5,12 @@ Feature: History Power Monitor
 Background:
 
     Given Open the IoT Connect web browser
-
-    # Scenario: Testing access to the history display screen
-    #     When Provide valid "ProjectIOT" and "IOT@1234"
-    #     And Click on submit button  
-    #     And Click the History Power Moniter menu bar
-    #     Then Successfully entered the history screen
+    @smoke @sanity
+    Scenario: Testing access to the history display screen
+        When Provide valid "ProjectIOT" and "IOT@1234"
+        And Click on submit button  
+        And Click the History Power Moniter menu bar
+        Then Successfully entered the history screen
 
     # Scenario: Testing the history display screen
     #     When Provide valid "ProjectIOT" and "IOT@1234"
@@ -217,9 +217,9 @@ Background:
     #     And Select "10" from multiple options
     #     Then Displaying "10" items correctly
     
-    Scenario: Testing the Previous button
-        When Provide valid "ProjectIOT" and "IOT@1234"
-        And Click on submit button
-        And Click the History Power Moniter menu bar
-        And Click the previous button
-        Then Clicked the previous button successfully
+    # Scenario: Testing the Previous button
+    #     When Provide valid "ProjectIOT" and "IOT@1234"
+    #     And Click on submit button
+    #     And Click the History Power Moniter menu bar
+    #     And Click the previous button
+    #     Then Clicked the previous button successfully
