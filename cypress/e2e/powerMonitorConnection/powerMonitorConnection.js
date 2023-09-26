@@ -125,6 +125,35 @@ Then('The system displays monitor data based on the specified ID {string} correc
     cy.get('[data-test="table-body"] > tr > :nth-child(3)').should('text', monitorID);
 })
 
-And('Click the Show entries', () => {
-    cy.get('.form-control').select(0)
+// คลิก Drop Down List
+And('Click the Show entries {string} items', (select) => {
+    cy.get('.form-control').select(select)
 })
+
+// เลือก Drop Down List สำเร็จ
+Then('Displaying {string} items correctly', (select) => {
+  cy.wait(4000);
+  cy.get('.form-control').should('have.value', select);
+  cy.get('.form-control').clear();
+});
+
+// คลิกปุ่มก่อนหน้า
+And('Click the Previous Button', () => {
+  cy.get(':nth-child(5) > .btn').click();
+  cy.get('.row > :nth-child(2) > .btn').click();
+});
+
+// คลิกปุ่มก่อนหน้าสำเร็จ
+Then('Successfully clicked the Previous Button', () => {
+  cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(1)').should('text', '1');
+});
+
+// คลิกปุ่มถัดไป
+And('Click the Next Button', () => {
+  cy.get(':nth-child(5) > .btn').click();
+});
+
+// คลิกปุ่มถัดไปสำเร็จ
+Then('Successfully clicked the Next Button', () => {
+  cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(1)').should('text', '11');
+});

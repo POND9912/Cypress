@@ -185,3 +185,7 @@ And('Click the previous button', () => {
 Then('Clicked the previous button successfully', () => {
   cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(1)').should('be.vaule', '1');
 });
+
+Then('Displaying {string} items correctly', (select) => {
+  cy.get('.form-control').should('have.value', select);
+});

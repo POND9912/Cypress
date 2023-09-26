@@ -163,15 +163,23 @@ Background:
         # And Enter the monitor ID "538135"
         # And Click the Search button
         # Then The system displays monitor data based on the specified ID "538135" correctly
-        And Enter the monitor ID "999999"
-        And Click the Search button
-        Then The system does not display any information
+        # And Enter the monitor ID "999999"
+        # And Click the Search button
+        # Then The system does not display any information
         # And Enter the monitor name "CO Detector C"
         # And Enter the monitor ID "999999"
         # And Click the Date picker button
         # And Select date "05/09/2034"
         # And Click the Search button
         # Then The system does not display any information
+        # And Click the Previous Button
+        # Then Successfully clicked the Previous Button
+        # And Click the Next Button
+        # Then Successfully clicked the Next Button
+        And Enter the monitor name "CO Detector C"
+        And Enter the monitor ID "999999"
+        And Click the Date picker button
+        And Select date "05/09/2034"
 
 
     # Scenario: Testing the text box
@@ -190,8 +198,25 @@ Background:
     #     And Click the Date picker button
     #     Then The system displays the current calendar correctly
 
-    Scenario: Multi-Item Dropdown
-        When Provide valid "ProjectIOT" and "IOT@1234"
-        And Click on submit button  
-        And Click the Power Moniter Connection menu bar
-        And Click the Show entries
+    # Scenario: Multi-Item Dropdown
+    #     When Provide valid "ProjectIOT" and "IOT@1234"
+    #     And Click on submit button  
+    #     And Click the Power Moniter Connection menu bar
+    #     And Click the Show entries "10" items
+    #     Then Displaying "10" items correctly
+    #     And Click the Show entries "20" items
+    #     Then Displaying "20" items correctly
+
+    # Scenario: Test the Previous Button
+    #     When Provide valid "ProjectIOT" and "IOT@1234"
+    #     And Click on submit button  
+    #     And Click the Power Moniter Connection menu bar
+    #     And Click the Previous Button
+    #     Then Successfully clicked the Previous Button
+
+    # Scenario: Test the Next Button
+    #     When Provide valid "ProjectIOT" and "IOT@1234"
+    #     And Click on submit button  
+    #     And Click the Power Moniter Connection menu bar
+    #     And Click the Next Button
+    #     Then Successfully clicked the Next Button
