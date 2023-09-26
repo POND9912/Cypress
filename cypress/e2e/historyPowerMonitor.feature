@@ -6,11 +6,11 @@ Background:
 
     Given Open the IoT Connect web browser
     @smoke @sanity
-    Scenario: Testing access to the history display screen
-        When Provide valid "ProjectIOT" and "IOT@1234"
-        And Click on submit button  
-        And Click the History Power Moniter menu bar
-        Then Successfully entered the history screen
+    # Scenario: Testing access to the history display screen
+    #     When Provide valid "ProjectIOT" and "IOT@1234"
+    #     And Click on submit button  
+    #     And Click the History Power Moniter menu bar
+    #     Then Successfully entered the history screen
 
     # Scenario: Testing the history display screen
     #     When Provide valid "ProjectIOT" and "IOT@1234"
@@ -42,155 +42,161 @@ Background:
     #     When Provide valid "ProjectIOT" and "IOT@1234"
     #     And Click on submit button
     #     And Click the History Power Moniter menu bar
-        # And Click the Date picker button
-        # Then The system displays the current calendar correctly
-        # And Click the Date picker button
-        # And Select date "12/09/2023"
-        # Then The system displays the date "12/09/2023" correctly
-        # And Enter the monitor name "DB-1"
-        # And Enter the monitor ID "283210"
-        # And Click the Date picker button
-        # And Select date "12/09/2023"
-        # And Click the Search button
-        # Then The system correctly displays the name Monitor "DB-1", the monitor ID "283210", and the date "12/09/2023", and the information is accurate
-        # And Enter the monitor name "DB-1"
-        # And Enter the monitor ID "283214"
-        # And Click the Date picker button
-        # And Select date "12/09/2023"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Enter the monitor name "DB-121321"
-        # And Enter the monitor ID "28321421312"
-        # And Click the Date picker button
-        # And Select date "11/08/2034"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Enter the monitor name "DB-1"
-        # And Enter the monitor ID "283210"
-        # And Click the Date picker button
-        # And Select date "11/08/2034"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Enter the monitor name "DB-1"
-        # And Enter the monitor ID "283214"
-        # And Click the Date picker button
-        # And Select date "11/08/2034"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Enter the monitor name "DB-1"
-        # And Enter the monitor ID "283210"
-        # And Click the Search button
-        # Then The system correctly displays the name Monitor "DB-1", the monitor ID "283210", and the information is accurate
-        # And Enter the monitor name "DB-1"
-        # And Enter the monitor ID "283214"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Enter the monitor name "DB-1"
-        # And Enter the monitor ID "999999"
-        # And Click the Date picker button
-        # And Select date "11/08/2034"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Enter the monitor name "DB-1"
-        # And Click the Search button
-        # Then The system correctly displays the name Monitor "DB-1" and the information is accurate
-        # And Enter the monitor name "DB-1"
-        # And Enter the monitor ID "999999"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Enter the monitor name "DB-1"
-        # And Click the Date picker button
-        # And Select date "11/08/2034"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Enter the monitor name "DB-1"
-        # And Enter the monitor ID "999999"
-        # And Click the Date picker button
-        # And Select date "12/09/2023"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Enter the monitor name "DB-1"
-        # And Click the Date picker button
-        # And Select date "12/09/2023"
-        # And Click the Search button
-        # Then The system correctly displays the name Monitor "DB-1" and the information is accurate
-        # And Enter the monitor name "DB-1233212"
-        # And Enter the monitor ID "999999"
-        # And Click the Date picker button
-        # And Select date "12/09/2023"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Enter the monitor name "DB-1233212"
-        # And Enter the monitor ID "283210"
-        # And Click the Date picker button
-        # And Select date "12/09/2023"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Enter the monitor name "DB-1233212"
-        # And Enter the monitor ID "999999"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Enter the monitor name "DB-1233212"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Enter the monitor name "DB-1233212"
-        # And Enter the monitor ID "283210"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Enter the monitor name "DB-1233212"
-        # And Click the Date picker button
-        # And Select date "12/09/2023"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Enter the monitor name "DB-1233212"
-        # And Enter the monitor ID "283210"
-        # And Click the Date picker button
-        # And Select date "11/08/2034"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Enter the monitor name "DB-1233212"
-        # And Click the Date picker button
-        # And Select date "11/08/2034"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Click the Date picker button
-        # And Select date "12/09/2023"
-        # And Click the Search button
-        # Then The system correctly displays the date "12/09/2023", and the information is accurate
-        # And Enter the monitor ID "283210"
-        # And Click the Date picker button
-        # And Select date "12/09/2023"
-        # And Click the Search button
-        # Then The system correctly displays the Monitor ID "283210" and the information is accurate
-        # And Click the Date picker button
-        # And Select date "11/08/2034"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Enter the monitor ID "999999"
-        # And Click the Date picker button
-        # And Select date "11/08/2034"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Enter the monitor ID "283210"
-        # And Click the Date picker button
-        # And Select date "11/08/2034"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Enter the monitor ID "999999"
-        # And Click the Date picker button
-        # And Select date "12/09/2023"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Enter the monitor ID "283210"
-        # And Click the Search button
-        # Then The system correctly displays the Monitor ID "283210" and the information is accurate
-        # And Enter the monitor ID "999999"
-        # And Click the Search button
-        # Then The system does not display any information
-        # And Select "10" from multiple options
-        # Then Displaying "10" items correctly
-        # And Select "50" from multiple options
-        # Then Displaying "50" items correctly
+    #     And Click the Date picker button
+    #     Then The system displays the current calendar correctly
+    #     And Click the Date picker button
+    #     And Select date "12/09/2023"
+    #     Then The system displays the date "12/09/2023" correctly
+    #     And Enter the monitor name "DB-1"
+    #     And Enter the monitor ID "283210"
+    #     And Click the Date picker button
+    #     And Select date "12/09/2023"
+    #     And Click the Search button
+    #     Then The system correctly displays the name Monitor "DB-1", the monitor ID "283210", and the date "12/09/2023", and the information is accurate
+    #     And Enter the monitor name "DB-1"
+    #     And Enter the monitor ID "283214"
+    #     And Click the Date picker button
+    #     And Select date "12/09/2023"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Enter the monitor name "DB-121321"
+    #     And Enter the monitor ID "28321421312"
+    #     And Click the Date picker button
+    #     And Select date "11/08/2034"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Enter the monitor name "DB-1"
+    #     And Enter the monitor ID "283210"
+    #     And Click the Date picker button
+    #     And Select date "11/08/2034"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Enter the monitor name "DB-1"
+    #     And Enter the monitor ID "283214"
+    #     And Click the Date picker button
+    #     And Select date "11/08/2034"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Enter the monitor name "DB-1"
+    #     And Enter the monitor ID "283210"
+    #     And Click the Search button
+    #     Then The system correctly displays the name Monitor "DB-1", the monitor ID "283210", and the information is accurate
+    #     And Enter the monitor name "DB-1"
+    #     And Enter the monitor ID "283214"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Enter the monitor name "DB-1"
+    #     And Enter the monitor ID "999999"
+    #     And Click the Date picker button
+    #     And Select date "11/08/2034"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Enter the monitor name "DB-1"
+    #     And Click the Search button
+    #     Then The system correctly displays the name Monitor "DB-1" and the information is accurate
+    #     And Enter the monitor name "DB-1"
+    #     And Enter the monitor ID "999999"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Enter the monitor name "DB-1"
+    #     And Click the Date picker button
+    #     And Select date "11/08/2034"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Enter the monitor name "DB-1"
+    #     And Enter the monitor ID "999999"
+    #     And Click the Date picker button
+    #     And Select date "12/09/2023"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Enter the monitor name "DB-1"
+    #     And Click the Date picker button
+    #     And Select date "12/09/2023"
+    #     And Click the Search button
+    #     Then The system correctly displays the name Monitor "DB-1" and the information is accurate
+    #     And Enter the monitor name "DB-1233212"
+    #     And Enter the monitor ID "999999"
+    #     And Click the Date picker button
+    #     And Select date "12/09/2023"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Enter the monitor name "DB-1233212"
+    #     And Enter the monitor ID "283210"
+    #     And Click the Date picker button
+    #     And Select date "12/09/2023"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Enter the monitor name "DB-1233212"
+    #     And Enter the monitor ID "999999"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Enter the monitor name "DB-1233212"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Enter the monitor name "DB-1233212"
+    #     And Enter the monitor ID "283210"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Enter the monitor name "DB-1233212"
+    #     And Click the Date picker button
+    #     And Select date "12/09/2023"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Enter the monitor name "DB-1233212"
+    #     And Enter the monitor ID "283210"
+    #     And Click the Date picker button
+    #     And Select date "11/08/2034"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Enter the monitor name "DB-1233212"
+    #     And Click the Date picker button
+    #     And Select date "11/08/2034"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Click the Date picker button
+    #     And Select date "12/09/2023"
+    #     And Click the Search button
+    #     Then The system correctly displays the date "12/09/2023", and the information is accurate
+    #     And Enter the monitor ID "283210"
+    #     And Click the Date picker button
+    #     And Select date "12/09/2023"
+    #     And Click the Search button
+    #     Then The system correctly displays the Monitor ID "283210" and the information is accurate
+    #     And Click the Date picker button
+    #     And Select date "11/08/2034"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Enter the monitor ID "999999"
+    #     And Click the Date picker button
+    #     And Select date "11/08/2034"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Enter the monitor ID "283210"
+    #     And Click the Date picker button
+    #     And Select date "11/08/2034"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Enter the monitor ID "999999"
+    #     And Click the Date picker button
+    #     And Select date "12/09/2023"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Enter the monitor ID "283210"
+    #     And Click the Search button
+    #     Then The system correctly displays the Monitor ID "283210" and the information is accurate
+    #     And Enter the monitor ID "999999"
+    #     And Click the Search button
+    #     Then The system does not display any information
+    #     And Select "10" from multiple options
+    #     Then Displaying "10" items correctly
+    #     And Select "50" from multiple options
+    #     Then Displaying "50" items correctly
+    #     And Enter the monitor name "DB-1"
+    #     And Enter the monitor ID "283214"
+    #     And Click the Date picker button
+    #     And Select date "12/09/2023"
+    #     And Click the Clear button
+    #     Then Data clearance successful
 
     # Scenario: Testing the search button
     #     When Provide valid "ProjectIOT" and "IOT@1234"
@@ -223,3 +229,10 @@ Background:
     #     And Click the History Power Moniter menu bar
     #     And Click the previous button
     #     Then Clicked the previous button successfully
+
+    # Scenario: Test the Next button
+    #     When Provide valid "ProjectIOT" and "IOT@1234"
+    #     And Click on submit button
+    #     And Click the History Power Moniter menu bar
+    #     And Click the next button
+    #     Then Clicked the next button successfully

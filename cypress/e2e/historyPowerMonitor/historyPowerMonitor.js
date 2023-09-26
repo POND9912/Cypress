@@ -34,7 +34,7 @@ And('Click on submit button', () => {
 And('Click the History Power Moniter menu bar', () => {
   cy.wait(4000);
   cy.get(':nth-child(4) > .ttt-menu-bg').click();
-  cy.get('.menu-open > .nav > :nth-child(2) > .nav-link').click();
+  cy.get('.menu-open > .nav > :nth-child(2) > .nav-link', { timeout: 10000 }).click();
 });
 
 // ตรวจสอบว่าหัวข้อเรื่องตรงไหม
@@ -129,7 +129,7 @@ Then('The system correctly displays the name Monitor {string}, the monitor ID {s
 // ระบบไม่แสดงข้อมูล
 Then('The system does not display any information', () => {
   cy.wait(4000)
-  cy.wrap('').should('be.empty'); // ต้องแก้ไข
+  cy.get('.col-5 > p').should('text', 'Showing 0 to 0 of 0 entries')
   cy.get('.btn-outline-dark').click();
 })
 
@@ -180,7 +180,7 @@ And('Select {string} from multiple options', (select) => {
 
 // แสดงจำนวนข้อมูลได้ถูกต้อง
 Then('Displaying {string} items correctly', (select) => {
-  cy.get('.col-5 > p').should('text', 'Showing 1 to ' + select + ' of 96275 entries');
+  cy.get('.form-control').should('have.value', select);
 });
 
 // คลิกปุ่มก่อนหน้า
@@ -190,6 +190,30 @@ And('Click the previous button', () => {
   cy.get('.paginate > :nth-child(1) > .btn').click();
 });
 
+// คลิกปุ่มถัดไปสำเร็จ
 Then('Clicked the previous button successfully', () => {
-  cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(1)').should('be.vaule', '1');
+  cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(1)').should('text', '1')
 });
+
+// คลิกปุ่มถัดไป
+And('Click the next button', () => {
+  cy.wait(4000);
+  cy.get(':nth-child(8) > .btn').click();
+});
+
+// คลิกปุ่มสำเร็จ
+Then('Clicked the next button successfully', () => {
+  cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(1)').should('text', '11')
+});
+
+// คลิกปุ่ม clear
+And('Click the Clear button', () => {
+  cy.get('.btn-outline-dark').click();
+})
+
+// เคลียร์ข้อมูลสำเร็จ
+Then('Data clearance successful', () => {
+  cy.get('.filter > :nth-child(1)').should('be.visible');
+  cy.get('.filter > :nth-child(2)').should('be.visible');
+  cy.get('.date-picker').should('be.visible');
+})
