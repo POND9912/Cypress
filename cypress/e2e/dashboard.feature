@@ -10,4 +10,4 @@ Background:
         When Provide valid "ProjectIOT" and "IOT@1234"
         And Click on submit button  
         And Click the History Power Moniter menu bar
-        Then Successfully entered the history screen
+        Then Successfully entered the dashboard screen

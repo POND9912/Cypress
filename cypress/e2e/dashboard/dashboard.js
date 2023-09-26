@@ -25,11 +25,11 @@ And('Click on submit button', () => {
 // คลิกเมนู History Power Monitor
 And('Click the History Power Moniter menu bar', () => {
   cy.wait(4000);
-  cy.get(':nth-child(4) > .ttt-menu-bg').click();
+  cy.get(':nth-child(2) > .ttt-menu-bg').click();
   cy.get('.menu-open > .nav > :nth-child(2) > .nav-link').click();
 });
 
 // ตรวจสอบว่าหัวข้อเรื่องตรงไหม
-Then('Successfully entered the history screen', () => {
-  cy.get('h1').contains('History Power Monitor');
+Then('Successfully entered the dashboard screen', () => {
+  cy.get('h1').contains('Dashboard Power Monitor');
 });
