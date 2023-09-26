@@ -88,12 +88,12 @@ Then("The system displays the current calendar correctly", () => {
   cy.get('.react-datepicker__month-container').should('be.visible');
 });
 
-// เลือกวันที่ 11/08/2023
+// เลือกวันที่ 12/09/2023
 And('Select date {string}', (date) => {
   cy.get('.date-picker').type(date).click();
 });
 
-// ระบแสดงวันที่ 11/08/2023 ได้ถูกต้อง
+// ระบแสดงวันที่ 12/09/2023 ได้ถูกต้อง
 Then('The system displays the date {string} correctly', (date) => {
   cy.get('.date-picker').should('be.visible', date);
   cy.get('.date-picker').clear();
