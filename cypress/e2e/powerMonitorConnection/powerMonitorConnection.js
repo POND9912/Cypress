@@ -19,6 +19,7 @@ When("Provide valid {string} and {string}", (username, password) => {
 
 // คลิกปุ่ม submit เพื่อเข้าสู่ระบบ
 And("Click on submit button", () => {
+  cy.wait(4000);
   cy.get("#btn_login").click();
 });
 
@@ -157,3 +158,154 @@ And('Click the Next Button', () => {
 Then('Successfully clicked the Next Button', () => {
   cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(1)').should('text', '11');
 });
+
+// คลิกปุ่ม clear
+And('Click the Clear button', () => {
+  cy.get('.btn-outline-dark').click();
+})
+
+// เคลียร์ข้อมูลสำเร็จ
+Then('Data clearance successful', () => {
+  cy.get('.filter > :nth-child(1)').should('text', '');
+  cy.get('.filter > :nth-child(2)').should('text', '');
+  cy.get('.date-picker').should('text', '');
+})
+
+// คลิกปุ่ม Add
+And('Click the Add Button', () => {
+  cy.wait(4000);
+  cy.get('.add').click();
+})
+
+// แสดงหน้า Add Power Monitor Connection
+Then('The Add Power Monitor Connection Page is displayed', () => {
+  cy.get('.title-add').title('Add Power Monitor');
+})
+
+// กรอกข้อมูลมอนิเตอร์ไอดี
+And("Enter Monitor ID {string}", (monitorID) => {
+  cy.wait(2000);
+  cy.get(':nth-child(1) > .form-input').type(monitorID);
+});
+
+// กรอกข้อมูลชื่อมอนิเตอร์
+And("Enter Monitor Name {string}", (monitorName) => {
+  cy.get('.mt-\\[25px\\] > :nth-child(2) > .form-input').type(monitorName);
+});
+
+// กรอกรายละเอียดมอนิเตอร์
+And("Enter Monitor Details {string}", (detail) => {
+  cy.wait(2000);
+  cy.get('#detail').type(detail);
+});
+
+// กรอกสถานที่ตั้งของมอนิเตอร์
+And("Enter Location {string}", (location) => {
+  cy.wait(2000);
+  cy.get('#location').type(location);
+});
+
+// กรอกหมายเหตุ
+And("Enter Remarks {string}", (remarks) => {
+  cy.wait(2000);
+  cy.get('#remark').type(remarks);
+});
+
+// ระบุความถี่ของ API
+And("Specify API Frequency {string}", (location) => {
+  cy.wait(2000);
+  cy.get('.form-input.ml-2').type(location);
+});
+
+// คลิกปุ่ม Add Monitor
+And("Click the Add Monitor button", () => {
+  cy.get('.add').click();
+})
+
+// ระบบทำการเพิ่มข้อมูลมอนิเตอร์
+Then('The system is adding a monitor named {string}', (monitorName) => {
+  cy.get('.swal2-confirm').click();
+  cy.wait(4000);
+  cy.get('.global').type(monitorName);
+})
+
+// ระบบแสดง Error
+Then('The system is unable to add the monitor', () => {
+  cy.get('#swal2-title').title('Error');
+  cy.get('.swal2-confirm').click();
+  cy.get('.cancel').click();
+  cy.get('.swal2-confirm').click();
+})
+
+// คลิกปุ่มยกเลิก
+And('Click the Cancel button', () => {
+  cy.get('.cancel').click();
+})
+
+// ระบบทำการยกเลิกการเพิ่มมอนิเตอร์
+Then('The system for canceling monster additions', () => {
+  cy.get('#swal2-title').title('Cancel');
+  cy.get('.swal2-confirm').click();
+});
+
+// คลิกไอคอนแก้ไข
+And('Click the edit icon', () => {
+  cy.get(':nth-child(1) > .action > [href="/IoT_Master_Data/PowerMonitorConnection/editMonitor"] > img').click();
+});
+
+// เข้าสู่หน้าแก้ไขมอนิเตอร์
+Then('The Edit Power Monitor screen is displayed', () => {
+  cy.get('.title-add').title('Edit Power Monitor');
+})
+
+// คลิกไอคอน View
+And('Click the view icon', () => {
+  cy.get(':nth-child(1) > .action > [href="/IoT_Master_Data/PowerMonitorConnection/viewMonitor"] > img').click();
+})
+
+// เข้าสู่หน้า View
+Then('The View Power Monitor screen is displayed', () => {
+  cy.get('.title-add').title('View Power Monitor');
+})
+
+// คลิกปุ่มปิด
+And('Click the close button', () => {
+  cy.get('.form-button').click();
+})
+
+// กลับไปยังหน้า View
+Then('Return to the View Power Monitor screen', () => {
+  cy.get("h1").contains("Power Monitor Connection");
+})
+
+// คลิกไอคอนลบ
+And('Click the delete icon', () => {
+  cy.wait(4000);
+  cy.get(':nth-child(1) > .action > .delete-icon').click();
+});
+
+// เข้าสู่หน้า Delete
+Then('The Delete Power Monitor screen is displayed', () => {
+  cy.get('#swal2-title').title('Are you sure?');
+});
+
+// คลิกปุ่มลบ
+And('Click the delete button', () => {
+  cy.get('.swal2-confirm').click();
+})
+
+// ระบบทำการลบมอนิเตอร์
+Then('The system deletes the monster', () => {
+  cy.get('#swal2-title').title('Deleted!');
+  cy.get('.swal2-confirm').click();
+})
+
+// คลิกปุ่มยกเลิก
+And('Click the cancel button', () => {
+  cy.get('.swal2-cancel').click();
+})
+
+// ระบบทำการยกเลิกการลบมอนิเตอร์
+Then('The system cancels the monster deletion', () => {
+  cy.get('h1').contains('Power Monitor Connection');
+})
