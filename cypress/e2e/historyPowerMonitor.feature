@@ -60,7 +60,7 @@ Background:
     #     And Click the Search button
     #     Then The system does not display any information
     #     And Enter the monitor name "DB-121321"
-    #     And Enter the monitor ID "28321421312"
+    #     And Enter the monitor ID "999999"
     #     And Click the Date picker button
     #     And Select date "11/08/2034"
     #     And Click the Search button
