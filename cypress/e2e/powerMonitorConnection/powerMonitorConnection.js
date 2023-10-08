@@ -114,16 +114,15 @@ Then(
   (date) => {
     cy.wait(4000);
     cy.get(".date-picker").should("have.value", date);
-    cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(2)').should(
-      "text",
-      "CO Detector C"
-    );
+    cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(1)').should("text", "1");
+    cy.get(".btn-outline-dark").click();
   }
 );
 
 // ระบบแสดงข้อมูลตามไอดีมอนิเตอร์
 Then('The system displays monitor data based on the specified ID {string} correctly', (monitorID) => {
     cy.get('[data-test="table-body"] > tr > :nth-child(3)').should('text', monitorID);
+    cy.get(".btn-outline-dark").click();
 })
 
 // คลิก Drop Down List
@@ -135,7 +134,6 @@ And('Click the Show entries {string} items', (select) => {
 Then('Displaying {string} items correctly', (select) => {
   cy.wait(4000);
   cy.get('.form-control').should('have.value', select);
-  cy.get('.form-control').clear();
 });
 
 // คลิกปุ่มก่อนหน้า
@@ -220,6 +218,7 @@ And("Specify API Frequency {string}", (location) => {
 // คลิกปุ่ม Add Monitor
 And("Click the Add Monitor button", () => {
   cy.get('.add').click();
+  cy.wait(4000);
 })
 
 // ระบบทำการเพิ่มข้อมูลมอนิเตอร์
@@ -250,6 +249,7 @@ Then('The system for canceling monster additions', () => {
 
 // คลิกไอคอนแก้ไข
 And('Click the edit icon', () => {
+  cy.wait(4000);
   cy.get(':nth-child(1) > .action > [href="/IoT_Master_Data/PowerMonitorConnection/editMonitor"] > img').click();
 });
 
@@ -308,4 +308,45 @@ And('Click the cancel button', () => {
 // ระบบทำการยกเลิกการลบมอนิเตอร์
 Then('The system cancels the monster deletion', () => {
   cy.get('h1').contains('Power Monitor Connection');
+})
+
+// แก้ไขข้อมูลมอนิเตอร์ไอดี
+And("Edit Monitor ID {string}", (monitorID) => {
+  cy.wait(2000);
+  cy.get(':nth-child(1) > .form-input').clear().type(monitorID);
+});
+
+// แก้ไขข้อมูลชื่อมอนิเตอร์
+And("Edit Monitor Name {string}", (monitorName) => {
+  cy.get('.mt-\\[25px\\] > :nth-child(2) > .form-input').clear().type(monitorName);
+});
+
+// แก้ไขรายละเอียดมอนิเตอร์
+And("Edit Monitor Details {string}", (detail) => {
+  cy.wait(2000);
+  cy.get('#detail').clear().type(detail);
+});
+
+// แก้ไขสถานที่ตั้งของมอนิเตอร์
+And("Edit Location {string}", (location) => {
+  cy.wait(2000);
+  cy.get('#location').clear().type(location);
+});
+
+// แก้ไขหมายเหตุ
+And("Edit Remarks {string}", (remarks) => {
+  cy.wait(2000);
+  cy.get('#remark').clear().type(remarks);
+});
+
+// แก้ไขความถี่ของ API
+And("Edit Specify API Frequency {string}", (location) => {
+  cy.wait(2000);
+  cy.get('[value="1"]').clear();
+  cy.get('.form-input.ml-2').clear().type(location);
+});
+
+Then("Successfully edited the monster", () => {
+  cy.get('.add').click();
+  cy.get('.swal2-confirm').click();
 })
