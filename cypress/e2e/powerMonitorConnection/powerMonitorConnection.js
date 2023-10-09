@@ -350,3 +350,11 @@ Then("Successfully edited the monster", () => {
   cy.get('.add').click();
   cy.get('.swal2-confirm').click();
 })
+
+Then("Failed to edit the monster", () => {
+  cy.get('.add').click();
+  cy.get('#swal2-title').title('Error');
+  cy.get('.swal2-confirm').click();
+  cy.get('.cancel').click();
+  cy.get('.swal2-confirm').click();
+})
