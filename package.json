@@ -4,7 +4,8 @@
   "description": "Cucumber Framework",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./node_modules/cypress/bin/cypress run",
+    "start": "node ./node_modules/cypress/bin/cypress open"
   },
   "keywords": [
     "cypress"
