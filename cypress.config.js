@@ -12,4 +12,6 @@ module.exports = defineConfig({
       downloadDirectory: "cypress/downloads",
     },
   },
+  viewportWidth: 1512,
+  viewportHeight: 982,
 });
