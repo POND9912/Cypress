@@ -18,18 +18,18 @@ Background:
     #     And Click the History Power Moniter menu bar
     #     Then Successfully entered the history screen
 
-    # Scenario: Testing the text box
-    #     When Provide valid "ProjectIOT" and "IOT@1234"
-    #     And Click on submit button
-    #     And Click the History Power Moniter menu bar
-    #     And Not entering the monitor name
-    #     Then The system does not display the monitor name in the text box
-    #     And Enter the monitor name "DB-1"
-    #     Then The system will display "DB-1" as entered in the monitor name text box
-    #     And Not entering the monitor ID
-    #     Then The system does not display the monitor ID in the text box
-    #     And Enter the monitor ID "283210"
-    #     Then The system will display "283210" as entered in the monitor ID text box
+    Scenario: Testing the text box
+        When Provide valid "ProjectIOT" and "IOT@1234"
+        And Click on submit button
+        And Click the History Power Moniter menu bar
+        And Not entering the monitor name
+        Then The system does not display the monitor name in the text box
+        And Enter the monitor name "DB-1"
+        Then The system will display "DB-1" as entered in the monitor name text box
+        And Not entering the monitor ID
+        Then The system does not display the monitor ID in the text box
+        And Enter the monitor ID "283210"
+        Then The system will display "283210" as entered in the monitor ID text box
 
     # Scenario: Testing the date picker
     #     When Provide valid "ProjectIOT" and "IOT@1234"
