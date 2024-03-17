@@ -1,9 +1,10 @@
 import { Given, When, Then, And } from 'cypress-cucumber-preprocessor/steps';
 
-// Given ตั้งค่าเงื่อนไขเริ่มต้นหรือสถานะเริ่มต้น (เริ่มต้นมาก็ทำงานเลยเป็นอันดับแรก)
-// When  ดำเนินการหรือเหตุการณ์
-// Then  ตรวจสอบหรือยืนยันผลลัพธ์
-// And   
+// Scenario คือเรื่องราวที่กำลังจะเขียน
+// Given เป็นการกำหนด state เริ่มต้นของ application
+// When เป็นการอธิบายในส่วนของ action ที่เกิดจาก user
+// Then เป็นการอธิบายในส่วนของ ผลที่เกิดจากการกระทำนั้นๆ
+// And มันจะเป็นตัวเชื่อม step ต่างๆเข้าด้วยกันใน scenario นั้นๆ
 
 Cypress.on('uncaught:exception', (err, runnable) => {
   // returning false here prevents Cypress from failing the test
@@ -51,6 +52,7 @@ Then('The system does not display the Product No in the text box', () => {
 
 // กรอกรหัสผลิตภัณฑ์ '10fcdbb4'
 And('Enter the Product No {string}', (productNo) => {
+  cy.wait(4000)
   cy.get('.filter > :nth-child(1)').type(productNo);
 });
 
@@ -91,10 +93,294 @@ Then('The system does not display the Category in the text box', () => {
   cy.get('.p-dropdown-trigger').should('be.visible', ' ');
 });
 
-// เลือกหมวดหมู่ 'AquaFusion'
+// // เลือกหมวดหมู่ 'Furniture'
+And('Select {string} from the Category dropdown', (Furniture) => {
+  cy.get('.p-dropdown-trigger').click();
+  cy.get('.p-dropdown-item').contains(Furniture).should('be.visible').click();
+});
 
-// ระบบแสดงชื่อผลิตภัณฑ์ 'AquaFusion'
+// //ระบบแสดงชื่อผลิตภัณฑ์ 'Furniture'
+Then('Should see {string} is selected', (Furniture) => {
+  cy.get('.p-dropdown-label').should('contain', Furniture); // ตรวจสอบว่า dropdown มีข้อความ "Furniture" หลังจากที่เลือก
+});
 
+// คลิกปุ่ม Search
+And('Click the Search button', () => {
+  cy.get('.filter > .btn-primary').click();
+});
+
+// ระบบแสดงข้อมูลทั้งหมด
+Then('The system displays the data of all product correctly at the present time', () => {
+  cy.get('.table-responsive').should('be.visible')
+})
+
+// ระบบแสดงข้อมูลตรงกับที่ค้นหา
+Then('The system display the list of searched products {string}, {string}, {string}',(productNo, productName, Furniture)=>{
+  cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(2)').should('be.visible', productNo);
+  cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(3)').should('be.visible', productName);
+  cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(4)').should('be.visible', Furniture);
+});
+
+// ระบบไม่แสดงข้อมูล
+Then('The system does not display any information', () => {
+  cy.wait(2000)
+  cy.get('.col-5 > p').should('text', 'Showing 0 to 0 of 0 entries')
+  cy.get('.btn-outline-dark').click();
+})
+
+//เช็คปุ่ม clear
+And('Click the clear button', () => {
+  cy.get('.btn-outline-dark').click();
+})
+
+//คลิก text box global search
+And('Click text box',()=>{
+  cy.get('.global-search').click();
+});
+
+//ระบบไม่แสดงข้อมูลต่าง ๆ ใน text box
+Then('The system does not display', () => {
+  cy.get('.global-search').should('be.visible', ' ');
+});
+
+//กรอกข้อมูล Product No ใน global search เพื่อค้นหา 
+And('Entering information {string}',(productNo)=>{
+  cy.get('.global-search').type(productNo);
+});
+
+//ระบบแสดงข้อมูลในตารางตรงกับที่ค้นหา global search
+Then('The system display list searched',()=>{
+  cy.get('[data-test="table-body"] > tr > :nth-child(2)').should('be.visible')
+});
+
+// คลิกตัวเลือกหลายรายการ Showing
+And('Select {string} from multiple options', (select) => {
+  cy.wait(2000);
+  cy.get('.form-control').select(0).should('have.value', select);
+});
+
+// แสดงจำนวนข้อมูลได้ถูกต้อง
+Then('Displaying {string} items correctly', (select) => {
+  cy.get('.col-5 > p').should('text', 'Showing 1 to ' + select + ' of 50 entries');
+});
+
+// คลิกปุ่มก่อนหน้า
+And('Click the previous button', () => {
+  cy.wait(2000);
+  cy.get(':nth-child(7) > .btn').click();
+  cy.get('.paginate > :nth-child(1) > .btn').click();
+});
+
+// เช็คลำดับเลขหน้าว่ากลับมายังเลขที่เดิมไหม
+Then('Clicked the previous button successfully', () => {
+  cy.get(':nth-child(2) > .btn').contains('1').should('be.visible');
+});
+
+// คลิกปุ่มถัดไป
+And('Click the next button', () => {
+  cy.wait(2000);
+  cy.get(':nth-child(7) > .btn').click();
+});
+
+// เช็คว่า Showing x + 1 ไหม (เลื่อนไปหน้าที่ 2 คือ 10 + 1 = 11) 
+Then('Clicked the next button successfully', () => {
+  cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(1)').should('text', '11')
+});
+
+
+
+//================================================ Open Modal ================================================
+
+And('Click icon edit',()=>{
+  //คลิกโดยไม่สนใจการคอลลิชันของอีลิเมนต์ 
+  cy.get(':nth-child(1) > .action > .edit-icon').click({force: true});
+});
+
+Then('Successfully entered the Modal screen',()=>{
+  cy.wait(4000);
+  cy.get('.text-3xl').contains('Edit Amount');
+  cy.get('.text-1xl.col-span-2').contains('Product No');
+  cy.get('.text-1xl.col-span-1').contains('Product Name');
+  cy.get(':nth-child(6) > label').contains('In bound');
+  cy.get(':nth-child(8) > label').contains('Out bound');
+});
+
+And('Click icon cross',()=>{
+  cy.get('.text-5xl').click();
+});
+
+Then('Successfully closed the Modal screen',()=>{
+  cy.get('h1').contains('F/G In-Out');
+});
+
+//================================================ In bound ================================================
+
+And('Click radio In bound',()=>{
+  cy.get('#inbound').click({force: true});
+});
+
+Then('Successfully display table the Modal',()=>{
+  cy.get('TableInOUt').contains('Lot in Stonk');
+  cy.get('TableInOUt').contains('Lot History');
+});
+
+And('Click Navbar Lot in Stock',()=>{
+  cy.wait(2000);
+  cy.get('.Stock').contains('Lot in Stock').click({force: true});
+});
+
+Then('Successfully display nameParagraph Lot in Stock',()=>{
+  cy.get('.min-w-full > thead > tr > :nth-child(1)').contains('Lot No');
+  cy.get('.min-w-full > thead > tr > :nth-child(2)').contains('Rack Name');
+  cy.get('.min-w-full > thead > tr > :nth-child(3)').contains('Row');
+  cy.get('.min-w-full > thead > tr > :nth-child(4)').contains('Column');
+  cy.get('.min-w-full > thead > tr > :nth-child(5)').contains('Amount');
+  cy.get('.min-w-full > thead > tr > :nth-child(6)').contains('Expired Date');
+});
+
+// 
+And('Select {string} from multiple options In bound Lot in Stock Showing', (select) => {
+  cy.wait(2000);
+  cy.get('.text-start > .form-control').select(select).should('have.value', select);
+});
+
+// แสดงจำนวนข้อมูลได้ถูกต้อง
+Then('Displaying {string} items correctly In bound Lot in Stock Showing', (select) => {
+  cy.get('.TableInOut > .row > .col-5').should('text', 'Showing 1 to ' + select + ' of 2 entries');
+});
+
+//คลิก text box global search
+And('Click text box global search',()=>{
+  cy.get('.text-end > form > .global-search').click();
+});
+
+//ระบบไม่แสดงข้อมูลต่าง ๆ ใน text box
+Then('The system does not display global search', () => {
+  cy.get('.text-end > form > .global-search').should('be.visible', ' ');
+});
+
+//กรอกข้อมูล Lot No ใน global search เพื่อค้นหา 
+And('Entering information {string} from modal',(lotNo)=>{
+  cy.get('.text-end > form > .global-search').type(lotNo);
+});
+
+//ระบบแสดงข้อมูลในตารางตรงกับที่ค้นหา global search
+Then('The system display list searched from modal',()=>{
+  cy.get('.min-w-full > tbody > :nth-child(1) > :nth-child(1)').should('be.visible')
+});
+
+And('Click button save',()=>{
+  cy.get('.save').click();
+});
+
+Then('Successfully display alert',()=>{
+  cy.get('.swal2-popup').contains('Do you want to Save the changes');
+});
+
+And('Click button save yes',()=>{
+  cy.get('.swal2-confirm').click();
+});
+
+And('Click button save no',()=>{
+  cy.get('.swal2-cancel').click();
+});
+
+Then('Successfully display alert complte',()=>{
+  cy.get('.swal2-header').contains('Save');
+});
+
+Then('Successfully display alert cancle',()=>{
+  cy.get('.text-3xl').contains('Edit Amount');
+});
+
+
+// คลิกปุ่มถัดไป
+And('Click the next button Lot in Stock ', () => {
+  cy.wait(2000);
+  cy.get('.TableInOut > .row > .paginate > :nth-child(3) > .btn').click();
+
+});
+
+Then('Clicked the next button successfully Lot in Stock ', () => {
+  
+});
+
+// คลิกปุ่มก่อนหน้า
+And('Click the previous button Lot in Stock', () => {
+  cy.wait(2000);
+  cy.get('.TableInOut > .row > .paginate > :nth-child(3) > .btn').click();
+  cy.get('.TableInOut > .row > .paginate > :nth-child(1)').click();
+});
+
+// เช็คลำดับเลขหน้าว่ากลับมายังเลขที่เดิมไหม
+Then('Clicked the previous button successfully Lot in Stock ', () => {
+  cy.get('.TableInOut > .row > .paginate > :nth-child(2) > .btn').contains('1').should('be.visible');
+
+});
+
+
+// คลิกปุ่มก่อนหน้า
+And('Click the previous button Lot in Stock', () => {
+  cy.wait(2000);
+  // Click the previous button
+  cy.get('.TableInOut > .row > .paginate > :nth-child(3) > .btn').click();
+});
+
+// เช็คลำดับเลขหน้าว่ากลับมายังเลขที่เดิมไหม
+Then('Clicked the previous button successfully Lot in Stock', () => {
+  // Check if the previous button has the correct page number after clicking
+  cy.get('.TableInOut > .row > .paginate > :nth-child(2) > .btn').contains('1').should('be.visible');
+});
+
+
+And('Click Navbar Lot History',()=>{
+  cy.get('.History').contains('Lot History').click({force: true});
+});
+
+Then('Successfully display nameParagraph Lot History',()=>{
+  cy.get('.min-w-full > thead > tr > :nth-child(1)').contains('No');
+  cy.get('.min-w-full > thead > tr > :nth-child(2)').contains('Lot No');
+  cy.get('.min-w-full > thead > tr > :nth-child(3)').contains('Rack Name');
+  cy.get('.min-w-full > thead > tr > :nth-child(4)').contains('Status');
+  cy.get('.min-w-full > thead > tr > :nth-child(5)').contains('Row');
+  cy.get('.min-w-full > thead > tr > :nth-child(6)').contains('Column');
+  cy.get('.min-w-full > thead > tr > :nth-child(7)').contains('Amount');
+  cy.get('.min-w-full > thead > tr > :nth-child(8)').contains('Added Date');
+  cy.get('.min-w-full > thead > tr > :nth-child(9)').contains('Remark');
+});
+
+
+//================================================ Out bound ================================================
+
+And('Click toggle switch',()=>{
+  cy.get('.slider').click({force: true});
+});
+
+And('Click radio Out bound',()=>{
+  cy.get('#outbound').click({force: true});
+});
+
+
+Then('Successfully display nameParagraph Out bound Lot in Stock',()=>{
+  cy.wait(2000);
+  cy.get('.min-w-full > thead > tr > :nth-child(1)').contains('Lot No');
+  cy.get('.min-w-full > thead > tr > :nth-child(2)').contains('Rack Name');
+  cy.get('.min-w-full > thead > tr > :nth-child(3)').contains('Row');
+  cy.get('.min-w-full > thead > tr > :nth-child(4)').contains('Column');
+  cy.get('.min-w-full > thead > tr > :nth-child(5)').contains('Amount');
+  cy.get('.min-w-full > thead > tr > :nth-child(6)').contains('Expired Date');
+});
+
+Then('Successfully display nameParagraph Out bound Lot in Stock manual',()=>{
+  cy.wait(2000);
+  cy.get('.min-w-full > thead > tr > :nth-child(1)').contains('Select');
+  cy.get('.min-w-full > thead > tr > :nth-child(2)').contains('Lot No');
+  cy.get('.min-w-full > thead > tr > :nth-child(3)').contains('Rack Name');
+  cy.get('.min-w-full > thead > tr > :nth-child(4)').contains('Row');
+  cy.get('.min-w-full > thead > tr > :nth-child(5)').contains('Column');
+  cy.get('.min-w-full > thead > tr > :nth-child(6)').contains('Amount');
+  cy.get('thead > tr > :nth-child(7)').contains('Expired Date');
+});
 
 // // คลิกเพื่อเปิดปฎิทิน
 // And("Click the Date picker button", () => {
@@ -118,76 +404,8 @@ Then('The system does not display the Category in the text box', () => {
 //   cy.get('.date-picker').clear();
 // });
 
-// คลิกปุ่ม Search
-And('Click the Search button', () => {
-  cy.get('.filter > .btn-primary').click();
-});
-
-// ระบบแสดงข้อมูลทั้งหมด
-Then('The system displays the data of all monsters correctly at the present time', () => {
-  cy.get('.table-responsive').should('be.visible')
-})
-
-// // ระบบแสดงข้อมูลตามที่เลือกได้ถูกต้อง
-// Then('The system correctly displays the name Monitor {string}, the monitor ID {string}, and the date {string}, and the information is accurate', (monitorName, monitorID, date) => {
-//   cy.wait(4000)
-//   cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(2)').should('be.visible', monitorName)
-//   cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(3)').should('be.visible', monitorID)
-//   cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(10)').should('be.visible', date)
-//   cy.get('.btn-outline-dark').click();
-// })
-
-// // ระบบไม่แสดงข้อมูล
-// Then('The system does not display any information', () => {
-//   cy.wait(4000)
-//   cy.wrap('').should('be.empty'); // ต้องแก้ไข
-//   cy.get('.btn-outline-dark').click();
-// })
-
-// // ระบบแสดงข้อมูลตามชื่อและไอดีที่กรอกได้ถูกต้อง
-// Then('The system correctly displays the name Monitor {string}, the monitor ID {string}, and the information is accurate', (monitorName, monitorID) => {
-//   cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(2)').should('be.visible', monitorName)
-//   cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(3)').should('be.visible', monitorID)
-//   cy.get('.btn-outline-dark').click();
-// })
-
-// // ระบบแสดงข้อมูลตามชื่อที่กรอกได้ถูกต้อง
-// Then('The system correctly displays the name Monitor {string} and the information is accurate', (monitorName) => {
-//   cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(2)').should('be.visible', monitorName)
-//   cy.get('.btn-outline-dark').click();
-// })
-
 // // ระบบแสดงข้อมูลตามวันที่กรอกได้ถูกต้อง
 // Then('The system correctly displays the date {string}, and the information is accurate', (date) => {
 //   cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(10)').should('be.visible', date)
 //   cy.get('.btn-outline-dark').click();
 // })
-
-// // ระบบแสดงข้อมูลตามไอดีที่กรอกได้ถูกต้อง
-// Then('The system correctly displays the Monitor ID {string} and the information is accurate', (monitorID) => {
-//   cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(3)').should('be.visible', monitorID)
-//   cy.get('.btn-outline-dark').click();
-// })
-
-
-// คลิกตัวเลือกหลายรายการ
-And('Select {string} from multiple options', (select) => {
-  cy.wait(4000);
-  cy.get('.form-control').select(1).should('have.value', select);
-});
-
-// แสดงจำนวนข้อมูลได้ถูกต้อง
-Then('Displaying {string} items correctly', (select) => {
-  cy.get('.col-5 > p').should('text', 'Showing 1 to ' + select + ' of 50 entries');
-});
-
-// // คลิกปุ่มก่อนหน้า
-// And('Click the previous button', () => {
-//   cy.wait(4000);
-//   cy.get(':nth-child(8) > .btn').click();
-//   cy.get('.paginate > :nth-child(1) > .btn').click();
-// });
-
-// Then('Clicked the previous button successfully', () => {
-//   cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(1)').should('be.vaule', '1');
-// });
