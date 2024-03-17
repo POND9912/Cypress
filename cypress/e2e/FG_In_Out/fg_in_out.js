@@ -6,8 +6,7 @@ import { Given, When, Then, And } from 'cypress-cucumber-preprocessor/steps';
 // And   
 
 Cypress.on('uncaught:exception', (err, runnable) => {
-  // returning false here prevents Cypress from
-  // failing the test
+  // returning false here prevents Cypress from failing the test
   return false;
 });
 
@@ -39,48 +38,63 @@ Then('Successfully entered the FG In-Out screen', () => {
   cy.get('h1').contains('F/G In-Out');
 });
 
-// // ทดสอบโดยไม่กรอกรหัสผลิตภัณฑ์
+// ทดสอบโดยไม่กรอกรหัสผลิตภัณฑ์
 And('Not entering the Product No', () => {
   cy.wait(4000)
   cy.get('.filter > :nth-child(1)').type(' ');
 })
 
-// // ระบบไม่แสดงรหัสผลิตภัณฑ์
+// ระบบไม่แสดงรหัสผลิตภัณฑ์
 Then('The system does not display the Product No in the text box', () => {
   cy.get('.filter > :nth-child(1)').should('be.visible', ' ');
 });
 
-// // กรอกรหัสผลิตภัณฑ์ '10fcdbb4'
+// กรอกรหัสผลิตภัณฑ์ '10fcdbb4'
 And('Enter the Product No {string}', (productNo) => {
   cy.get('.filter > :nth-child(1)').type(productNo);
 });
 
-// ระบบแสดงชื่อมอนิเตอร์ '10fcdbb4' ในกล่องข้อความ
+// ระบบแสดงรหัสผลิตภัณฑ์ '10fcdbb4' ในกล่องข้อความ
 Then('The system will display {string} as entered in the Product No text box', (productNo) => {
     cy.get('.filter > :nth-child(1)').should('be.visible', productNo);
     cy.get('.filter > :nth-child(1)').clear();
 });
 
-// // ไม่กรอกไอดีมอนิเตอร์
+// ไม่กรอกชื่อผลิตภัณฑ์
 And('Not entering the Product Name', () => {
   cy.get('.filter > :nth-child(2)').type(' ');
 });
 
-// // ระบบไม่แสดงไอดีมอนิเตอร์
+// ระบบไม่แสดงชื่อผลิตภัณฑ์
 Then('The system does not display the Product Name in the text box', () => {
   cy.get('.filter > :nth-child(2)').should('be.visible', ' ');
 });
 
-// // กรอกไอดีมอนิเตอร์ '283210'
+// กรอกชื่อผลิตภัณฑ์ 'AquaFusion'
 And('Enter the Product Name {string}', (productName) => {
   cy.get('.filter > :nth-child(2)').type(productName);
 });
 
-// ระบบแสดงไอดีมอนิเตอร์ '283210'
-Then('The system will display {string} as entered in the Product Name text box', (monitorID) => {
+// ระบบแสดงชื่อผลิตภัณฑ์ 'AquaFusion'
+Then('The system will display {string} as entered in the Product Name text box', (productName) => {
     cy.get('.filter > :nth-child(2)').should('be.visible', productName);
     cy.get('.filter > :nth-child(2)').clear();
 });
+
+// ไม่เลือกหมวดหมู่
+And('Not entering the Category', () => {
+  cy.get('.p-dropdown-trigger').type(' ');
+});
+
+// ระบบไม่แสดงข้อมูลหมวดหมู่ในช่อง Dropdown
+Then('The system does not display the Category in the text box', () => {
+  cy.get('.p-dropdown-trigger').should('be.visible', ' ');
+});
+
+// เลือกหมวดหมู่ 'AquaFusion'
+
+// ระบบแสดงชื่อผลิตภัณฑ์ 'AquaFusion'
+
 
 // // คลิกเพื่อเปิดปฎิทิน
 // And("Click the Date picker button", () => {
@@ -104,15 +118,15 @@ Then('The system will display {string} as entered in the Product Name text box',
 //   cy.get('.date-picker').clear();
 // });
 
-// // คลิกปุ่ม Search
-// And('Click the Search button', () => {
-//   cy.get('.filter > .btn-primary').click();
-// });
+// คลิกปุ่ม Search
+And('Click the Search button', () => {
+  cy.get('.filter > .btn-primary').click();
+});
 
-// // ระบบแสดงข้อมูลทั้งหมด
-// Then('The system displays the data of all monsters correctly at the present time', () => {
-//   cy.get('.table-responsive').should('be.visible')
-// })
+// ระบบแสดงข้อมูลทั้งหมด
+Then('The system displays the data of all monsters correctly at the present time', () => {
+  cy.get('.table-responsive').should('be.visible')
+})
 
 // // ระบบแสดงข้อมูลตามที่เลือกได้ถูกต้อง
 // Then('The system correctly displays the name Monitor {string}, the monitor ID {string}, and the date {string}, and the information is accurate', (monitorName, monitorID, date) => {
@@ -155,30 +169,17 @@ Then('The system will display {string} as entered in the Product Name text box',
 //   cy.get('.btn-outline-dark').click();
 // })
 
-// // คลิกดาวน์โหลดไฟล์ Excel
-// And("Click the Export CSV button", () => {
-//   cy.wait(5000);
-//   cy.get(".btn-success").click();
-// });
 
-// // ระบุไฟล์ที่ดาวน์โหลด
-// Then("A .csv file appears", () => {
-//   cy.readFile("cypress/downloads/monitor_data.csv").should(
-//     "contain",
-//     "Monitor Name"
-//   );
-// });
+// คลิกตัวเลือกหลายรายการ
+And('Select {string} from multiple options', (select) => {
+  cy.wait(4000);
+  cy.get('.form-control').select(1).should('have.value', select);
+});
 
-// // คลิกตัวเลือกหลายรายการ
-// And('Select {string} from multiple options', (select) => {
-//   cy.wait(4000);
-//   cy.get('.form-control').select(0).should('have.value', select);
-// });
-
-// // แสดงจำนวนข้อมูลได้ถูกต้อง
-// Then('Displaying {string} items correctly', (select) => {
-//   cy.get('.col-5 > p').should('text', 'Showing 1 to ' + select + ' of 96275 entries');
-// });
+// แสดงจำนวนข้อมูลได้ถูกต้อง
+Then('Displaying {string} items correctly', (select) => {
+  cy.get('.col-5 > p').should('text', 'Showing 1 to ' + select + ' of 50 entries');
+});
 
 // // คลิกปุ่มก่อนหน้า
 // And('Click the previous button', () => {
