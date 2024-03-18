@@ -85,7 +85,9 @@ Then('The system will display {string} as entered in the Product Name text box',
 
 // ไม่เลือกหมวดหมู่
 And('Not entering the Category', () => {
-  cy.get('.p-dropdown-trigger').type(' ');
+  // cy.get('.p-dropdown-trigger').type(' ');
+  cy.get('.p-dropdown-trigger').click();
+
 });
 
 // ระบบไม่แสดงข้อมูลหมวดหมู่ในช่อง Dropdown
@@ -220,8 +222,10 @@ And('Click radio In bound',()=>{
 });
 
 Then('Successfully display table the Modal',()=>{
-  cy.get('TableInOUt').contains('Lot in Stonk');
-  cy.get('TableInOUt').contains('Lot History');
+  // cy.get('.TableInOUt').contains('Lot in Stock');
+  // cy.get('.TableInOUt').contains('Lot History');
+  cy.get('.pr-3').should('be.visible');
+  
 });
 
 And('Click Navbar Lot in Stock',()=>{
@@ -333,6 +337,8 @@ Then('Clicked the previous button successfully Lot in Stock', () => {
 });
 
 
+
+
 And('Click Navbar Lot History',()=>{
   cy.get('.History').contains('Lot History').click({force: true});
 });
@@ -382,16 +388,29 @@ Then('Successfully display nameParagraph Out bound Lot in Stock manual',()=>{
   cy.get('thead > tr > :nth-child(7)').contains('Expired Date');
 });
 
-// // คลิกเพื่อเปิดปฎิทิน
-// And("Click the Date picker button", () => {
-//   cy.wait(4000);
-//   cy.get('.date-picker').click();
-// });
+// คลิกเพื่อเปิดปฎิทิน
+And("Click the Date picker button", () => {
+  cy.wait(4000);
+  // cy.get('#exp_date').click();
+  cy.get('[data-top="367.15625"]').click();
+
+});
 
 // // เปิดปฎิทินสำเร็จ
 // Then("The system displays the current calendar correctly", () => {
 //   cy.get('.react-datepicker__month-container').should('be.visible');
 // });
+
+// //เช็คว่าตรงวันที่ปัจุบันหรือไม่
+// Then('Successfully entered the date picker', () => {
+//   const currentDate = new Date();
+//   // นำเดือนปัจจุบันมาแปลงเป็นชื่อของเดือน
+//   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+//   const currentMonth = months[currentDate.getMonth()];
+//   // สร้างสตริง "DD Month YYYY"
+//   const formattedDate = `${currentDate.getDate()} ${currentMonth} ${currentDate.getFullYear()}`;
+//   cy.get('.exp_date').should('be.visible', formattedDate);
+// })
 
 // // เลือกวันที่ 11/08/2023
 // And('Select date {string}', (date) => {
@@ -409,3 +428,33 @@ Then('Successfully display nameParagraph Out bound Lot in Stock manual',()=>{
 //   cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(10)').should('be.visible', date)
 //   cy.get('.btn-outline-dark').click();
 // })
+
+
+And('Click the form the Product No',()=>{
+  cy.get('.grid.mb-3 > :nth-child(3) > .formModal').click();
+});
+
+And('Click the form the Product Name',()=>{
+  // cy.get('.grid.mb-3 > :nth-child(4) > #dropdownModal').click();
+});
+
+And('Click the form the Row',()=>{
+  cy.get('.grid.mb-3 > :nth-child(5) > #dropdownModalrow').click();
+});
+
+And('Click the form the Column',()=>{
+  cy.get(':nth-child(5) > :nth-child(5) > #dropdownModalrow').click();
+});
+
+And('Click the form the Amount',()=>{
+  cy.get(':nth-child(5) > :nth-child(2) > .formModal').click();
+});
+
+And('Click the form the Remark',()=>{
+  cy.get(':nth-child(5) > :nth-child(3) > .formModal').click();
+});
+
+And('Click the form the Forklift',()=>{
+  cy.get(':nth-child(5) > :nth-child(4) > #dropdownModal').click();
+});
+

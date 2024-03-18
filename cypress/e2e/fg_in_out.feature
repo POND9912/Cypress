@@ -9,7 +9,7 @@ Feature: FG In-Out
         When Provide valid "ProjectIOT" and "IOT@1234"
         And Click on submit button
         And Click the FG In-Out menu bar
-        And Click icon edit
+        # And Click icon edit
 
     # Scenario: Testing Login
         # When Provide valid "ProjectIOT" and "IOT@1234"
@@ -42,8 +42,8 @@ Feature: FG In-Out
     #     And Not entering the Product Name
     #     Then The system does not display the Product Name in the text box
 
-    #     And Not entering the Category
-    #     Then The system does not display the Category in the text box
+        # And Not entering the Category
+        # Then The system does not display the Category in the text box
 
     #     And Click the Search button
     #     The system displays the data of all product correctly at the present time
@@ -125,11 +125,6 @@ Feature: FG In-Out
 #     And Click Navbar Lot in Stock
 #     Then Successfully display nameParagraph Lot in Stock
 
-# Scenario: Testing In bound Lot History
-#     And Click radio In bound
-#     And Click Navbar Lot History
-#     Then Successfully display nameParagraph Lot History
-
 # Scenario: Testing In bound Lot in Stock Showing
 #     And Click radio In bound
 #     And Click Navbar Lot in Stock
@@ -178,6 +173,35 @@ Feature: FG In-Out
     #     And Click the previous button Lot in Stock 
     #     Then Clicked the previous button successfully Lot in Stock 
 
+# Scenario: Testing the date picker
+#     And Click the Date picker button
+#     # Then Successfully entered the date picker
+
+# Scenario: Testing form the Product No
+#     And Click the form the Product No
+
+# Scenario: Testing form the Product Name !
+#     And Click the form the Product Name
+
+# Scenario: Testing form the Row
+#     And Click the form the Row
+
+# Scenario: Testing form the Column
+#     And Click the form the Column
+
+# Scenario: Testing form the Amount
+#     And Click the form the Amount
+
+# Scenario: Testing form the Remark
+#     And Click the form the Remark
+
+# Scenario: Testing form the Forklift
+#     And Click the form the Forklift
+
+# Scenario: Testing In bound Lot History
+#     And Click radio In bound
+#     And Click Navbar Lot History
+#     Then Successfully display nameParagraph Lot History
 
 # Scenario: Testing In bound Lot History Showing
 #     And Click radio In bound
