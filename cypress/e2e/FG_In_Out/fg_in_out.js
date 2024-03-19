@@ -297,12 +297,10 @@ Then('Successfully display alert cancle',()=>{
   cy.get('.text-3xl').contains('Edit Amount');
 });
 
-
 // คลิกปุ่มถัดไป
 And('Click the next button Lot in Stock ', () => {
   cy.wait(2000);
   cy.get('.TableInOut > .row > .paginate > :nth-child(3) > .btn').click();
-
 });
 
 Then('Clicked the next button successfully Lot in Stock ', () => {
@@ -322,7 +320,6 @@ Then('Clicked the previous button successfully Lot in Stock ', () => {
 
 });
 
-
 // คลิกปุ่มก่อนหน้า
 And('Click the previous button Lot in Stock', () => {
   cy.wait(2000);
@@ -335,6 +332,8 @@ Then('Clicked the previous button successfully Lot in Stock', () => {
   // Check if the previous button has the correct page number after clicking
   cy.get('.TableInOut > .row > .paginate > :nth-child(2) > .btn').contains('1').should('be.visible');
 });
+
+
 
 
 
@@ -354,6 +353,53 @@ Then('Successfully display nameParagraph Lot History',()=>{
   cy.get('.min-w-full > thead > tr > :nth-child(8)').contains('Added Date');
   cy.get('.min-w-full > thead > tr > :nth-child(9)').contains('Remark');
 });
+
+
+
+//คลิก text box global search
+And('Click text box global search',()=>{
+  cy.get('.text-end > form > .global-search').click();
+});
+
+//ระบบไม่แสดงข้อมูลต่าง ๆ ใน text box
+Then('The system does not display global search', () => {
+  cy.get('.text-end > form > .global-search').should('be.visible', 'LOT20211123-115');
+});
+
+//กรอกข้อมูล Product No ใน global search เพื่อค้นหา 
+And('Entering information {string} global search',(lotNo)=>{
+  cy.get('.text-end > form > .global-search').type(lotNo);
+});
+
+//ระบบแสดงข้อมูลในตารางตรงกับที่ค้นหา global search
+Then('The system display list searched global search',()=>{
+  cy.get('.min-w-full > tbody > :nth-child(1) > :nth-child(2)').should('be.visible')
+});
+
+And('Select {string} from Show entries In bound Lot History',(select)=>{
+  cy.get('.text-start > .form-control').select(select).should('have.value', select);
+
+});
+
+
+Then('Successfully display {string} Show entries In bound Lot History', (select) => {
+  cy.get('.TableInOut > .row > .col-5').should('text', 'Showing 1 to ' + select + ' of 23 entries');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //================================================ Out bound ================================================
@@ -388,13 +434,13 @@ Then('Successfully display nameParagraph Out bound Lot in Stock manual',()=>{
   cy.get('thead > tr > :nth-child(7)').contains('Expired Date');
 });
 
-// คลิกเพื่อเปิดปฎิทิน
-And("Click the Date picker button", () => {
-  cy.wait(4000);
-  // cy.get('#exp_date').click();
-  cy.get('[data-top="367.15625"]').click();
+// // คลิกเพื่อเปิดปฎิทิน
+// And("Click the Date picker button", (select) => {
+//   cy.wait(4000);
+//   // cy.get('#exp_date').click();
+//   cy.get('[data-top="367.15625"]').select();
 
-});
+// });
 
 // // เปิดปฎิทินสำเร็จ
 // Then("The system displays the current calendar correctly", () => {
@@ -434,16 +480,16 @@ And('Click the form the Product No',()=>{
   cy.get('.grid.mb-3 > :nth-child(3) > .formModal').click();
 });
 
-And('Click the form the Product Name',()=>{
-  // cy.get('.grid.mb-3 > :nth-child(4) > #dropdownModal').click();
+And('Click the form the Rack Name',()=>{
+  cy.get('.grid.mb-3 > :nth-child(4) > #dropdownModal').select('');
 });
 
 And('Click the form the Row',()=>{
-  cy.get('.grid.mb-3 > :nth-child(5) > #dropdownModalrow').click();
+  cy.get('.grid.mb-3 > :nth-child(5) > #dropdownModalrow').select('');
 });
 
 And('Click the form the Column',()=>{
-  cy.get(':nth-child(5) > :nth-child(5) > #dropdownModalrow').click();
+  cy.get(':nth-child(5) > :nth-child(5) > #dropdownModalrow').select('');
 });
 
 And('Click the form the Amount',()=>{

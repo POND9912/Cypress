@@ -9,7 +9,7 @@ Feature: FG In-Out
         When Provide valid "ProjectIOT" and "IOT@1234"
         And Click on submit button
         And Click the FG In-Out menu bar
-        # And Click icon edit
+        And Click icon edit
 
     # Scenario: Testing Login
         # When Provide valid "ProjectIOT" and "IOT@1234"
@@ -79,7 +79,6 @@ Feature: FG In-Out
     #     And Click the Search button
     #     Then The system does not display any information
 
- 
     # Scenario: Test global search
     #      And Click text box 
     #      Then The system does not display
@@ -164,7 +163,6 @@ Feature: FG In-Out
 #     And Click button save no
 #     Then Successfully display alert cancle
 
- 
     # Scenario: Test the Next button Lot in Stock !
     #     And Click the next button Lot in Stock !
         # Then Clicked the next button successfully Lot in Stock !
@@ -180,13 +178,13 @@ Feature: FG In-Out
 # Scenario: Testing form the Product No
 #     And Click the form the Product No
 
-# Scenario: Testing form the Product Name !
-#     And Click the form the Product Name
+# Scenario: Testing form the Rack Name
+#     And Click the form the Rack Name
 
-# Scenario: Testing form the Row
+# Scenario: Testing form the Row !
 #     And Click the form the Row
 
-# Scenario: Testing form the Column
+# Scenario: Testing form the Column !
 #     And Click the form the Column
 
 # Scenario: Testing form the Amount
@@ -198,16 +196,41 @@ Feature: FG In-Out
 # Scenario: Testing form the Forklift
 #     And Click the form the Forklift
 
+
+
+
 # Scenario: Testing In bound Lot History
 #     And Click radio In bound
 #     And Click Navbar Lot History
 #     Then Successfully display nameParagraph Lot History
 
-# Scenario: Testing In bound Lot History Showing
-#     And Click radio In bound
-#     And Click Navbar Lot History
-#     Then Successfully display nameParagraph Lot History
+Scenario: Testing In bound Lot History Showing
+    And Click radio In bound
+    And Click Navbar Lot History
+    And Select "20" from Show entries In bound Lot History
+    Then Successfully display "20" Show entries In bound Lot History
 
+#    Scenario: Test global search
+#         And Click radio In bound
+#         And Click Navbar Lot History
+#          And Click text box global search
+#          Then The system does not display global search
+
+    #  Scenario: Test global search found
+    #     And Click radio In bound
+    #     And Click Navbar Lot History
+    #     And Click text box global search
+    #     And Entering information "LOT20211123-115" global search
+    #     Then The system display list searched global search
+
+
+    # Scenario: Test the Next button
+    #     And Click the next button
+    #     Then Clicked the next button successfully
+
+    # Scenario: Testing the Previous button
+    #     And Click the previous button
+    #     Then Clicked the previous button successfully
 
 #================================================ Out bound ================================================
 
