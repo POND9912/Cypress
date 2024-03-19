@@ -2,6 +2,12 @@ Feature: FG In-Out
 
     Feature Login page will work depending on the user credentials.
 
+# Scenario คือเรื่องราวที่กำลังจะเขียน
+# Given เป็นการกำหนด state เริ่มต้นของ application
+# When เป็นการอธิบายในส่วนของ action ที่เกิดจาก user
+# Then เป็นการอธิบายในส่วนของ ผลที่เกิดจากการกระทำนั้นๆ
+# And มันจะเป็นตัวเชื่อม step ต่างๆเข้าด้วยกันใน scenario นั้นๆ
+
     Background:
 
         // Login เข้าสู่ระบบเลย
@@ -16,8 +22,8 @@ Feature: FG In-Out
         # And Click on submit button
 
     # Scenario: Testing go to the FG In-Out menu
-        # And Click the FG In-Out menu bar
-        # Then Successfully entered the FG In-Out screen
+    #     And Click the FG In-Out menu bar
+    #     Then Successfully entered the FG In-Out screen
 
     # Scenario: Testing form search
         # And Not entering the Product No
@@ -59,11 +65,11 @@ Feature: FG In-Out
     #     Then The system does not display the Category in the text box
 
 #    Scenario: Testing Search all information is correct.
-#         And Enter the Product No "10fcdbb4"
-#         And Enter the Product Name "AquaFusion"
-#         And Select "Furniture" from the Category dropdown
-#         And Click the Search button
-#         Then The system display the list of searched products "10fcdbb4", "AquaFusion", "Furniture" 
+        # And Enter the Product No "10fcdbb4"
+        # And Enter the Product Name "AquaFusion"
+        # And Select "Furniture" from the Category dropdown
+        # And Click the Search button
+        # Then The system display the list of searched products "10fcdbb4", "AquaFusion", "Furniture" 
 
     #    Scenario: Testing Search Product No is wrong
     #     And Enter the Product No "A999"
@@ -105,11 +111,11 @@ Feature: FG In-Out
 # ================================================ Open Modal ================================================
 
 # Scenario: Testing icon edit and open modal
-#     And Click icon edit
+#     # And Click icon edit
 #     Then Successfully entered the Modal screen
 
 # Scenario: Testing icon cross and close modal
-#     And Click icon edit
+#     # And Click icon edit
 #     And Click icon cross
 #     Then Successfully closed the Modal screen
 
@@ -119,7 +125,7 @@ Feature: FG In-Out
 #     And Click radio In bound
 #     Then Successfully display table the Modal 
 
-# Scenario: Testing In bound Lot in Stock
+# Scenario: Testing In bound navbar Lot in Stock
 #     And Click radio In bound
 #     And Click Navbar Lot in Stock
 #     Then Successfully display nameParagraph Lot in Stock
@@ -164,10 +170,11 @@ Feature: FG In-Out
 #     Then Successfully display alert cancle
 
     # Scenario: Test the Next button Lot in Stock !
-    #     And Click the next button Lot in Stock !
+
+    #     And Click the next button Lot in Stock 
         # Then Clicked the next button successfully Lot in Stock !
 
-    # Scenario: Testing the Previous button Lot in Stock 
+    # Scenario: Testing the Previous button Lot in Stock !
     #     And Click the previous button Lot in Stock 
     #     Then Clicked the previous button successfully Lot in Stock 
 
