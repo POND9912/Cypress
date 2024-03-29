@@ -217,3 +217,8 @@ Then('Data clearance successful', () => {
   cy.get('.filter > :nth-child(2)').should('be.visible');
   cy.get('.date-picker').should('be.visible');
 })
+
+And('click select', () => {
+  cy.get('.form-control').select(3).should('have.value', '100');
+  cy.wait(4000);
+})
