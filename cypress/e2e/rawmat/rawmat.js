@@ -141,6 +141,106 @@ Then('The list of available options in the system appears correctly', () => {
   cy.get('.btn-outline-dark').click();
 })
 
-And('Click show entries button', () => {
-  cy.get('.form-control').select(0);
+And('Select {string} from multiple options', (select) => {
+  cy.wait(4000);
+  cy.get('.form-control').select(0).should('have.value', select);
+});
+
+Then('Displaying {string} items correctly', (select) => {
+  cy.get('.form-control').should('have.value', select);
+});
+
+Then('The system does not display any information', () => {
+  cy.wait(4000)
+  cy.get('.col-5 > p').should('text', 'Showing 0 to 0 of 0 entries')
+  cy.get('.btn-outline-dark').click();
+})
+
+And('Click the next button', () => {
+  cy.get(':nth-child(8) > .btn').click();
+})
+
+Then('The system displays the next table correctly {string}', (page) => {
+  cy.get('[data-test="table-body"] > :nth-child(1) > :nth-child(1)').should('text', page);
+})
+
+And('Click the previous button', () => {
+  cy.get(':nth-child(2) > .btn').click();
+})
+
+And('Do not enter information in the text box {string}', (search) => {
+  cy.get('.global-search').type(search);
+})
+
+Then('The system does not display any text in the text box', () => {
+  cy.get('.global-search').should('be.visible', ' ');
+})
+
+Then('The system displays the message specified in the text box correctly {string}', (serach) => {
+  cy.get('.global-search').should('be.visible', serach);
+})
+
+And('Click the edit button', () => {
+  cy.get(':nth-child(1) > .action > .edit-icon').click();
+})
+
+
+Then('The system displays {string} correctly', (edit) => {
+  cy.wait(4000);
+  cy.get('.pl-2').should('be.visible', edit);
+})
+
+And('Select Radio In bound', () => {
+  cy.get('#outbound').click();
+  cy.get('#inbound').click();
+})
+
+Then('The list of options appears correctly', () => {
+  cy.get('#inbound').should('be.visible');
+})
+
+And('Select the Lot in Stock navigation bar', () => {
+  cy.get('.History').click();
+  cy.get('.Stock').click();
+})
+
+Then('The system displays the table correctly', () => {
+  cy.get('.Stock').should('be.visible');
+})
+
+And('Select {string} from multiple options in modal', (select) => {
+  cy.wait(4000);
+  cy.get('.text-start > .form-control').select(0).should('have.value', select);
+});
+
+Then('Displaying {string} items correctly in modal', (select) => {
+  cy.get('.text-start > .form-control').should('have.value', select);
+});
+
+And('Click the calendar in the modal', () => {
+  cy.get('#exp_date').click();
+})
+
+
+And('Choose a date {string}', (date) => {
+  // Split the original date string into components
+  const components = date.split('/');
+
+  // Rearrange the components into YYYY-MM-DD format
+  const formattedDate = `${components[2]}-${components[1].padStart(2, '0')}-${components[0].padStart(2, '0')}`;
+  console.log(formattedDate);
+  cy.get('#exp_date').type(formattedDate).click();
+})
+
+Then('The selected date is displayed correctly', () => {
+  cy.get('#exp_date').should('be.visible', '05/03/2023');
+  cy.get('#exp_date').clear();
+})
+
+And('Enter the inventory number {string}', (lotNo) => {
+  cy.get('.grid.mb-3 > :nth-child(3) > .formModal').type(lotNo);
+})
+
+Then('The system correctly enters information {string} into the warehouse number text box', (lotNo) => {
+  cy.get('.grid.mb-3 > :nth-child(3) > .formModal').should('be.visible', lotNo);
 })
