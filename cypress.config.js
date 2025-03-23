@@ -7,7 +7,7 @@ module.exports = defineConfig({
       on("file:preprocessor", cucumber());
     },
     specPattern: "cypress/e2e/*.feature",
-    baseUrl: "http://150.95.25.8:6681/login",
+    baseUrl: "http://150.95.80.78:8888/",
     env: {
       downloadDirectory: "cypress/downloads",
     },
