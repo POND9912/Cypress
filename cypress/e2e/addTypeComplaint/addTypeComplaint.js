@@ -37,8 +37,14 @@ And("คลิกปุ่มเข้าสู่ระบบ", () => {
 
 And("คลิกเมนูประเภทคำร้องเรียน", () => {
   cy.wait(4000);
+  cy.get('.main-header > :nth-child(1) > :nth-child(1) > .nav-link').click();
   cy.get(".ttt-menu-bg").click();
   cy.get(':nth-child(5) > .nav-link').click();
+});
+
+And("คลิกปุ่มเพิ่มประเภทคำร้องเรียน", () => {
+  cy.wait(4000);
+  cy.get('a.text-center > .btn').click();
 });
 
 And("ยืนยันข้อตกลงหลักเกณฑ์รับคำร้องเรียน", () => {
@@ -67,6 +73,28 @@ And("คลิกปุ่มค้นหา", () => {
   cy.get(':nth-child(3) > .form-group > .btn').click();
 });
 
-Then("ระบบแสดงหน้าเมนูประเภทคำร้องเรียน", () => {
-  cy.get('.mb-3').contains("จัดการประเภทคำร้องเรียน");
+And("กรอกชื่อประเภทคำร้อง {string}", (typeName) => {
+  cy.get('#complaintTypeName').type(typeName);
+});
+
+And("กรอกรายละเอียดประเภทคำร้อง {string}", (typeDetail) => {
+  cy.get('#complaintTypeDetails').type(typeDetail);
+});
+
+And("เปิดใช้งานการมองเห็น", () => {
+  cy.get('.switch-label').click();
+});
+
+Then("ระบบแสดงหน้าเมนูเพิ่มประเภทคำร้องเรียน", () => {
+  cy.get('h3.mb-4 > b').contains("เพิ่มประเภทคำร้องเรียน");
+});
+
+Then("คลิกปุ่มบันทึก", () => {
+  cy.get('.btn').click();
+  cy.get('.row > :nth-child(2) > .col').click();
+  cy.wait(5000);
+});
+
+Then("คลิกปุ่มยกเลิก", () => {
+  cy.get('.lucide').click();
 });
