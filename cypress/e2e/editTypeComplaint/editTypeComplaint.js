@@ -42,9 +42,9 @@ And("คลิกเมนูประเภทคำร้องเรียน
   cy.get(':nth-child(5) > .nav-link').click();
 });
 
-And("คลิกปุ่มเพิ่มประเภทคำร้องเรียน", () => {
+And("คลิกปุ่มแก้ไขประเภทคำร้องเรียน", () => {
   cy.wait(4000);
-  cy.get('a.text-center > .btn').click();
+  cy.get(':nth-child(1) > :nth-child(5) > .d-flex > .lucide-square-pen').click();
 });
 
 And("ยืนยันข้อตกลงหลักเกณฑ์รับคำร้องเรียน", () => {
@@ -53,40 +53,20 @@ And("ยืนยันข้อตกลงหลักเกณฑ์รับ
   cy.get(".modal-footer > .w-100").click();
 });
 
-And("กรอกประเภทคำร้องเรียน {string}", (complaintType) => {
-  cy.wait(1000);
-  cy.get('.form-control').type(complaintType);
-});
-
-And("เลือกสถานะ {string}", (complaintStatus) => {
-  cy.wait(1000);
-  cy.get('.css-1hwfws3').click();
-  // เลือก input ตัวแรก
-  cy.get('#react-select-2-option-0').first().type(`${complaintStatus}{enter}`);
-});
-
-And("คลิกปุ่มถัดไป", () => {
-  cy.get(':nth-child(7) > .lucide').click();
-});
-
-And("คลิกปุ่มค้นหา", () => {
-  cy.get(':nth-child(3) > .form-group > .btn').click();
-});
-
 And("กรอกชื่อประเภทคำร้อง {string}", (typeName) => {
-  cy.get('#complaintTypeName').type(typeName);
+  cy.get('#complaintTypeName').clear().type(typeName);
 });
 
 And("กรอกรายละเอียดประเภทคำร้อง {string}", (typeDetail) => {
-  cy.get('#complaintTypeDetails').type(typeDetail);
+  cy.get('#complaintTypeDetails').clear().type(typeDetail);
 });
 
 And("เปิดใช้งานการมองเห็น", () => {
   cy.get('.switch-label').click();
 });
 
-Then("ระบบแสดงหน้าเมนูเพิ่มประเภทคำร้องเรียน", () => {
-  cy.get('h3.mb-4 > b').contains("เพิ่มประเภทคำร้องเรียน");
+Then("ระบบแสดงหน้าเมนูแก้ไขประเภทคำร้องเรียน", () => {
+  cy.get('.font-weight-bold').contains("แก้ไขประเภทคำร้องเรียน");
 });
 
 Then("คลิกปุ่มบันทึก", () => {
